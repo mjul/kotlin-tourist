@@ -1,6 +1,8 @@
 package tourist.patternmatching.withenums
 
 // Pattern matching in Kotlin is done with the when function
+// Also note that enums are singletons (object, not class) so unlike algebraic data types they cannot carry state
+
 enum class Shape {
     POINT,
     CIRCLE,
