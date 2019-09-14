@@ -1,4 +1,4 @@
-package patternmatching.withenums
+package tourist.patternmatching.withenums
 
 // Pattern matching in Kotlin is done with the when function
 enum class Shape {

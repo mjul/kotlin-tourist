@@ -1,4 +1,4 @@
-package patternmatching.withdataclasses
+package tourist.patternmatching.withdataclasses
 
 
 abstract class Shape {}
