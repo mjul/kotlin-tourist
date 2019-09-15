@@ -1,7 +1,7 @@
 package tourist.patternmatching.withdataclasses
 
 
-abstract class Shape {}
+abstract class Shape
 
 data class Point(val x: Int, val y: Int) : Shape()
 data class Circle(val centre: Point, val r: Int) : Shape()
