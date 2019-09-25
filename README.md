@@ -15,10 +15,15 @@ See pattern matching examples:
 
 ## Unit Testing
 Kotlin supports unit testing like any other JVM based language.
-It also has a DSL, Kotlin Test, for more elegant test formulation.
+You can use the Java unit test libraries directly or or use `kotlin.test` from 
+the Kotlin core library.
 
 ### JUnit5
 JUnit version 5 is supported. See for example [test for pattern matching](src/tourist-test/patternmatching/withdataclasses/MatchOnDataClassesKtTest.kt).
+
+### kotlin.test
+This uses the `kotlin.test` core library.
+See for example [test for tax calculation](src/tourist-test/taxcalculations/TaxCalculationsKtTest.kt)
 
 ## LICENSE
 MIT License. See [LICENSE](LICENSE) file for details.
