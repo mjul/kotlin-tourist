@@ -9,6 +9,9 @@ import tourist.taxcalculations.Kroner
 // https://github.com/kotlintest/kotlintest
 
 // KotlinTest offers many styles of test specifications
+// See https://github.com/kotlintest/kotlintest/blob/master/doc/styles.md
+
+// Here is an example of the StringSpec style:
 
 class KronerKotlinTestStringSpec : StringSpec(
     {
