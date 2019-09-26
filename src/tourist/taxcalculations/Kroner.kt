@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.BigInteger
 import java.math.RoundingMode
 
-class Kroner private constructor(private val totalOerer: BigInteger) {
+class Kroner private constructor(val totalOerer: BigInteger) {
 
     val totalKroner: BigDecimal
         get() = this.totalOerer.toBigDecimal().movePointLeft(2)

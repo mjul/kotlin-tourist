@@ -34,12 +34,27 @@ Kotlin supports unit testing like any other JVM based language.
 You can use the Java unit test libraries directly or or use `kotlin.test` from 
 the Kotlin core library.
 
+There is also a more extensive open-source test DSL called [KotlinTest](https://github.com/kotlintest/kotlintest)
+
 ### JUnit5
 JUnit version 5 is supported. See for example [test for pattern matching](src/tourist-test/patternmatching/withdataclasses/MatchOnDataClassesKtTest.kt).
 
 ### kotlin.test
 This uses the `kotlin.test` core library.
 See for example [test for tax calculation](src/tourist-test/taxcalculations/TaxCalculationsKtTest.kt)
+
+### KotlinTest
+[KotlinTest](https://github.com/kotlintest/kotlintest) is an extensive open-source test DSL for Kotlin 
+with a lot of matchers.
+
+Note that to avoid the warning from the log framework, SLF4J, every time we run these tests, 
+we need to include a log binder for the simple log framework:
+
+    SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+    SLF4J: Defaulting to no-operation (NOP) logger implementation
+    SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+
+To avoid this the project has a dependency to `org.slf4j:slf4j-simple:1.7.2`
 
 ## LICENSE
 MIT License. See [LICENSE](LICENSE) file for details.
