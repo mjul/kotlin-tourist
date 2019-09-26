@@ -45,7 +45,7 @@ See for example [test for tax calculation](src/tourist-test/taxcalculations/TaxC
 
 ### KotlinTest
 [KotlinTest](https://github.com/kotlintest/kotlintest) is an extensive open-source test DSL for Kotlin 
-with a lot of matchers.
+with a lot of matchers. It is very similar to [ScalaTest](http://www.scalatest.org/) for Scala.
 
 Note that to avoid the warning from the log framework, SLF4J, every time we run these tests, 
 we need to include a log binder for the simple log framework:
@@ -55,6 +55,15 @@ we need to include a log binder for the simple log framework:
     SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 
 To avoid this the project has a dependency to `org.slf4j:slf4j-simple:1.7.2`
+
+#### Property-Based Testing
+KotlinTest also supports property-based testing. This is similar to QuickCheck in Haskell.
+
+Property-based testign allows you to specify the invariants ("properties") of the code and have the test framework
+check them across a lot of examples without writing a lot of code.
+
+You can write custom generators for generating instances of your own types, 
+see [KronerKotlinTest.kt](src/tourist-test/taxcalculations/KronerKotlinTest.kt)
 
 ## LICENSE
 MIT License. See [LICENSE](LICENSE) file for details.

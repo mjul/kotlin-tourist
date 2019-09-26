@@ -1,9 +1,14 @@
 package taxcalculations
 
+import io.kotlintest.properties.Gen
+import io.kotlintest.properties.assertAll
+import io.kotlintest.properties.forAll
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.FunSpec
 import io.kotlintest.specs.StringSpec
+import org.junit.jupiter.api.assertAll
 import tourist.taxcalculations.Kroner
+import java.math.BigDecimal
 
 // Try testing Kroner using KotlinTest, an open-source DSL for Kotlin unit testing
 // https://github.com/kotlintest/kotlintest
@@ -33,3 +38,41 @@ class KronerKotlinTestFunSpec : FunSpec({
         sut.totalOerer.toBigDecimal().compareTo(sut.totalKroner * (100.toBigDecimal())) shouldBe 0
     }
 })
+
+// We can also do property-based testing
+class KronerSumOverloadStringSpec : StringSpec() {
+    init {
+        "sum must match" {
+            assertAll { a: Long, b: Long ->
+                (Kroner.fromKroner(a.toBigDecimal()) + Kroner.fromKroner(b.toBigDecimal())) shouldBe Kroner.fromKroner(a.toBigDecimal() + b.toBigDecimal())
+            }
+        }
+    }
+}
+
+// Now to make things cleaner, we can add a Generator for Kroner
+// This is the mechanism for generating the different values for the
+// property-based testing
+class KronerGenerator : Gen<Kroner> {
+    // Typical edge cases
+    override fun constants() = listOf<Kroner>(
+        Kroner.fromKroner(0),
+        Kroner.fromKroner(1)
+    )
+    // generate a random sequence of Kroner instances
+    override fun random(): Sequence<Kroner>  = generateSequence {
+        Kroner.fromKroner(Gen.bigInteger().random().first().toBigDecimal().movePointLeft(2))
+    }
+}
+private fun Gen.Companion.kroner(): Gen<Kroner> = KronerGenerator()
+
+// Now we can implement it again with a Generator
+class KronerSumOverloadWithCustomGeneratorStringSpec : StringSpec() {
+    init {
+        "sum must match" {
+            forAll(Gen.kroner(), Gen.kroner()) { a: Kroner, b: Kroner ->
+                a+b == Kroner.fromKroner(a.totalKroner + b.totalKroner)
+            }
+        }
+    }
+}
