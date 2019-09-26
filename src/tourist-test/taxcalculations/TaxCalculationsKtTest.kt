@@ -81,6 +81,12 @@ internal class KronerKtTest {
                 assertEquals(expected, Kroner.fromKroner(input))
             }
         }
+
+    @Test
+    fun kronerCanBeAddedUsingPlusOperator() {
+        val actual = Kroner.fromKroner(1) + Kroner.fromKroner(2)
+        assertEquals(Kroner.fromKroner(3), actual)
+    }
 }
 
 
