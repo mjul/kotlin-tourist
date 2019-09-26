@@ -2,6 +2,7 @@ package taxcalculations
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.FunSpec
+import io.kotlintest.specs.StringSpec
 import tourist.taxcalculations.Kroner
 
 // Try testing Kroner using KotlinTest, an open-source DSL for Kotlin unit testing
@@ -9,6 +10,15 @@ import tourist.taxcalculations.Kroner
 
 // KotlinTest offers many styles of test specifications
 
+class KronerKotlinTestStringSpec : StringSpec(
+    {
+        "Kroner .totalOerer and .totalKroner must represent the same amount" {
+            val sut = Kroner.fromOerer(108)
+            sut.totalOerer shouldBe 108.toBigInteger()
+            sut.totalKroner shouldBe 1.08.toBigDecimal()
+        }
+    }
+)
 
 // Try using the FunSpec variant
 class KronerKotlinTestFunSpec : FunSpec({
@@ -17,6 +27,6 @@ class KronerKotlinTestFunSpec : FunSpec({
         val sut = Kroner.fromKroner(kr)
         // BigDecimal is a bit special because equals does not compare the value but also the representation
         // compareTo is the one we want
-        sut.totalOerer.toBigDecimal().compareTo(sut.totalKroner*(100.toBigDecimal())) shouldBe 0
+        sut.totalOerer.toBigDecimal().compareTo(sut.totalKroner * (100.toBigDecimal())) shouldBe 0
     }
 })
