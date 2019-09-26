@@ -2,9 +2,9 @@ package tourist.taxcalculations
 
 import java.math.BigDecimal
 
-// Here we will see how to use extension functions and data classes
 
-// Extension functions are recommended in the Kotlin Coding Conventions (https://kotlinlang.org/docs/reference/coding-conventions.html#source-code-organization)
+// Extension functions are recommended in the Kotlin Coding Conventions
+// (https://kotlinlang.org/docs/reference/coding-conventions.html#source-code-organization)
 private val Int.percent: BigDecimal
     get() {
         return this.toBigDecimal().divide(BigDecimal(100))
