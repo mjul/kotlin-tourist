@@ -59,7 +59,7 @@ To avoid this the project has a dependency to `org.slf4j:slf4j-simple:1.7.2`
 #### Property-Based Testing
 KotlinTest also supports property-based testing. This is similar to QuickCheck in Haskell.
 
-Property-based testign allows you to specify the invariants ("properties") of the code and have the test framework
+Property-based testing allows you to specify the invariants ("properties") of the code and have the test framework
 check them across a lot of examples without writing a lot of code.
 
 You can write custom generators for generating instances of your own types, 
