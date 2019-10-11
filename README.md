@@ -65,5 +65,9 @@ check them across a lot of examples without writing a lot of code.
 You can write custom generators for generating instances of your own types, 
 see [KronerKotlinTest.kt](src/tourist-test/taxcalculations/KronerKotlinTest.kt)
 
+## Sequences
+The Kotlin library has a concept for lazy sequences. They are generated on demand and can be unbounded.
+See [DAG](src/tourist/dags/Dags.kt) for some examples of the building them with `sequence { }`,  `yield` and `yieldAll`.
+
 ## LICENSE
 MIT License. See [LICENSE](LICENSE) file for details.
