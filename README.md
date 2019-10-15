@@ -5,13 +5,20 @@ Learning Kotlin by taking a tour.
 See [app.kt](src/tourist/app.kt) for the canonical example.
 
 ## Pattern Matching
-Kotlin does not have pattern matching as we know it from the `match x with ...` expression in F# or OCaml which combines pattern matching and destructuring bindings.
+Kotlin does not have pattern matching as we know it from the `match x with ...` expression in F# or OCaml which combines
+pattern matching and destructuring bindings.
 
-It does have something similar in the form of the `when` expression.
-See pattern matching examples:
+Apparently the Kotlin designers think this is too complicated for their taste so they offer 
+similar but simpler alternative in the form of the `when` expression. 
+The compiler can check that it exhaustively matches everything for enums, but not in the general case.
+
+We will try different approaches to pattern matching to learn about qualities of the
+various styles:
+
 - with [enums](src/tourist/patternmatching/withenums/MatchOnEnums.kt)
 - with [classes](src/tourist/patternmatching/withdataclasses/MatchOnDataClasses.kt)
 - with [tagged unions](src/tourist/patternmatching/withtaggedunions/MatchOnTaggedUnions.kt) 
+- with [visitor pattern](src/tourist/patternmatching/withvisitors/MatchOnVisitor.kt)
 
 ## Extension Functions
 Idiomatic Kotlin uses _extension functions_ a lot. 
