@@ -102,7 +102,7 @@ class DAGFactoryFromEdges : StringSpec(
 
 class VerticesDepthFirstFrom : StringSpec(
     {
-        "Empty DAG should have empty connected vertices" {
+        "Empty DAG should have empty vertices" {
             val sut = DAG.emptyDAG<String, String>()
 
             val actual = verticesDepthFirstFrom(sut, Vertex("A"))
@@ -110,7 +110,7 @@ class VerticesDepthFirstFrom : StringSpec(
             val actualList = actual.toList()
             actualList.shouldBeEmpty()
         }
-        "A DAG should have single element vertices {A}" {
+        "A DAG should have single element vertices {A} from A" {
             val a = Vertex("A")
             val sut = DAG<String, String>(setOf(a), emptySet())
 
@@ -120,7 +120,7 @@ class VerticesDepthFirstFrom : StringSpec(
             actual shouldHaveSingleElement a
 
         }
-        "A->B DAG should have two vertices {A,B}" {
+        "A->B DAG should have two vertices {A,B} from A" {
             val ab = Edge(Vertices.A, Vertices.B, "is-connected-to")
             val sut = DAG.fromEdges(setOf(ab))
 
@@ -128,7 +128,15 @@ class VerticesDepthFirstFrom : StringSpec(
 
             actual shouldContainExactly listOf(Vertices.A, Vertices.B)
         }
-        "A->B->C DAG should have vertices {A,B,C}" {
+        "A->B DAG should have vertices {B} from B" {
+            val ab = Edge(Vertices.A, Vertices.B, "is-connected-to")
+            val sut = DAG.fromEdges(setOf(ab))
+
+            val actual = verticesDepthFirstFrom(sut, Vertices.B).toList()
+
+            actual shouldContainExactly listOf(Vertices.B)
+        }
+        "A->B->C DAG should have vertices {A,B,C} from A" {
             val ab = Edge(Vertices.A, Vertices.B, "is-a")
             val bc = Edge(Vertices.B, Vertices.C, "is-a")
             val sut = DAG.fromEdges(setOf(ab, bc))
@@ -137,7 +145,7 @@ class VerticesDepthFirstFrom : StringSpec(
 
             actual shouldContainExactly listOf(Vertices.A, Vertices.B, Vertices.C)
         }
-        "A->B->C A->D DAG should have vertices {A,B,C,D}" {
+        "A->B->C A->D DAG should have vertices {A,B,C,D} from A" {
             val ab = Edge(Vertices.A, Vertices.B, "is-a")
             val bc = Edge(Vertices.B, Vertices.C, "is-a")
             val ad = Edge(Vertices.A, Vertices.D, "is-a")
@@ -146,6 +154,16 @@ class VerticesDepthFirstFrom : StringSpec(
             val actual = verticesDepthFirstFrom(sut, Vertices.A).toList()
 
             actual shouldContainExactly listOf(Vertices.A, Vertices.B, Vertices.C, Vertices.D)
+        }
+        "A->B->C A->D DAG should have vertices {B,C} from B" {
+            val ab = Edge(Vertices.A, Vertices.B, "is-a")
+            val bc = Edge(Vertices.B, Vertices.C, "is-a")
+            val ad = Edge(Vertices.A, Vertices.D, "is-a")
+            val sut = DAG.fromEdges(setOf(ab, bc, ad))
+
+            val actual = verticesDepthFirstFrom(sut, Vertices.B).toList()
+
+            actual shouldContainExactly listOf(Vertices.B, Vertices.C)
         }
     }
 )
